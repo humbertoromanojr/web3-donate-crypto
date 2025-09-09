@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function Create() {
   const [message, setMessage] = useState("");
+  const [campaign, setCampaign] = useState({});
 
   const backgroundImageStyle = {
     backgroundImage: "url(/people-sunset.jpg)",
@@ -20,8 +21,20 @@ export default function Create() {
     justifyContent: "space-between",
   };
 
-  function handleRegisterCampaign() {
+  function handleRegisterCampaign(e) {
     setMessage("Campaign successfully registered");
+  }
+
+  function handleInputChange(e) {
+    setCampaign((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  }
+
+  function handleSave() {
+    setMessage(JSON.stringify(campaign));
+    console.log(campaign);
   }
 
   return (
@@ -47,12 +60,19 @@ export default function Create() {
                 type="text"
                 id="title"
                 className="form-control opacity-75"
+                onChange={handleInputChange}
+                value={campaign.title || ""}
               />
               <label htmlFor="title">Title</label>
             </div>
 
             <div className="form-floating mb-3">
-              <textarea id="description" className="form-control opacity-75" />
+              <textarea
+                id="description"
+                className="form-control opacity-75"
+                onChange={handleInputChange}
+                value={campaign.description || ""}
+              />
               <label htmlFor="description">Description</label>
             </div>
 
@@ -61,6 +81,8 @@ export default function Create() {
                 type="text"
                 id="imageUrl"
                 className="form-control opacity-75"
+                onChange={handleInputChange}
+                value={campaign.imageUrl || ""}
               />
               <label htmlFor="imageUrl">Imagem URL </label>
             </div>
@@ -70,6 +92,8 @@ export default function Create() {
                 type="text"
                 id="videoUrl"
                 className="form-control opacity-75"
+                onChange={handleInputChange}
+                value={campaign.videoUrl || ""}
               />
               <label htmlFor="videoUrl">Video URL</label>
             </div>
@@ -77,7 +101,7 @@ export default function Create() {
               <button
                 type="button"
                 className="btn btn-primary col-12 p-3 fw-bold mb-3 text-white"
-                onClick={handleRegisterCampaign}
+                onClick={handleSave}
               >
                 Save
               </button>
