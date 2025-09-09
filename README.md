@@ -35,6 +35,10 @@ DONATE CRYPTO WEB 3.0
 
 <div align="center">
   <img src="https://drive.google.com/uc?export=view&id=1A4Z2Tx4YN6zM7RzF4vHoQvJtlx5cYNHA" alt="" width="100%" border="0" />
+  <br />
+  <hr />
+  <br />
+  <img src="https://drive.google.com/uc?export=view&id=1iMrm5P-1jVQK7oUpJPmrefYvieB52BHR" alt="" width="100%" border="0" />
 </div>
 
 ## Install Frontend
