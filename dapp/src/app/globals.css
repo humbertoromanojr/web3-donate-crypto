@@ -5,7 +5,7 @@
  */
 :root,
 [data-bs-theme="light"] {
-  --bs-custom-web3: #0f1221;
+  --bs-custom-web3: #000;
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
@@ -190,6 +190,8 @@
 ::after,
 ::before {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 @media (prefers-reduced-motion: no-preference) {
   :root {
