@@ -49,3 +49,9 @@ export async function getCampaign(id) {
   const contract = getContract();
   return contract.methods.campaigns(id).call();
 }
+
+export async function donate(id, donation) {
+  await doLogin();
+  const contract = getContract();
+  return contract.methods.donate(id).send({ value: donation });
+}

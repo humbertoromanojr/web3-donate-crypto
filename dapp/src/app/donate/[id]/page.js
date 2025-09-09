@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 import { getCampaign } from "@/services/Web3Service";
+import Web3 from "web3";
 
 export default function Donate() {
   const params = useParams();
 
   const [campaign, setCampaign] = useState({});
   const [message, setMessage] = useState("");
+  const [donation, setDonation] = useState(0);
 
   const backgroundImageStyle = {
     backgroundImage: "url(/people-sunset.jpg)",
@@ -40,6 +42,21 @@ export default function Donate() {
         console.error(error);
       });
   }, []);
+
+  function handleDonate() {
+    setMessage("Donating for campaign...please wait...");
+    donate(params.id, donation)
+      .then(() => {
+        setMessage(
+          "Donation completed, thank you very much. Your balance will be updated in a few minutes."
+        );
+        setDonation(0);
+      })
+      .catch((error) => {
+        setMessage(`An error occurred: ${error.message}`);
+        console.error(error);
+      });
+  }
 
   return (
     <>
@@ -86,6 +103,30 @@ export default function Donate() {
                   {campaign.author}
                 </p>
                 <p className="lead mb-3">{campaign.description}</p>
+                <p className="mb-3 fst-italic mt-5">
+                  Hello my friend, what did you think of the Project? Already
+                  collected{" "}
+                  {Web3.utils.fromWei(campaign.balance || "0", "ether")} POL in
+                  this campaign. How much do you want to donate (in POL)?
+                </p>
+                <div className="mb-3">
+                  <div className="input-group">
+                    <input
+                      type="number"
+                      id="donation"
+                      value={donation}
+                      onChange={(e) => setDonation(e.target.value)}
+                      className="form-control p-3 w-50"
+                    />
+                    <span className="input-group-text">POL</span>
+                    <button
+                      className="btn btn-primary p-3"
+                      onClick={handleDonate}
+                    >
+                      Donate
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
