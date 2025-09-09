@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { doLogin } from "@/services/Web3Service";
+
 export default function Home() {
   const { push } = useRouter();
 
@@ -24,8 +26,14 @@ export default function Home() {
   };
 
   function handleLogin() {
-    setMessage("User successfully authenticated");
-    push("/create");
+    setMessage("Connecting to wallet...please wait...");
+    doLogin()
+      .then(() => {
+        push("/create");
+      })
+      .catch((error) => {
+        setMessage(`An error occurred: ${error.message}`);
+      });
   }
 
   return (
@@ -59,7 +67,7 @@ export default function Home() {
               </button>
             </div>
             {message ? (
-              <div className="alert alert-success mt-5 opacity-50">
+              <div className="alert alert-success mt-5 opacity-75">
                 {message}
               </div>
             ) : null}
