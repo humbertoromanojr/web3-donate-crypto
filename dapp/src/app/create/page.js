@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { addCampaign } from "@/services/Web3Service";
+import { addCampaign, getLastCampaignId } from "@/services/Web3Service";
 
 export default function Create() {
   const [message, setMessage] = useState("");
@@ -33,7 +33,12 @@ export default function Create() {
   function handleSave() {
     setMessage("Saving campaign...please wait...");
     addCampaign(campaign)
-      .then((tx) => JSON.stringify(tx))
+      .then((tx) => getLastCampaignId())
+      .then((id) => {
+        setMessage(
+          `Campaign saved with ID: ${id}. In a few moments, you will be ready to receive donations. . Use this link to promote it: http://localhost:3000/doante/${id}`
+        );
+      })
       .catch((error) => {
         setMessage(error.message);
         console.error(error);

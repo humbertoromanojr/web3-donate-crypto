@@ -3,7 +3,6 @@ import Web3 from "web3";
 import ABI from "./ABI.json";
 
 const contractAddress = "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8";
-const contract = new Web3.eth.Contract(ABI, contractAddress);
 
 export async function doLogin() {
   if (!window.ethereum) throw new Error("Metamask not installed");
@@ -22,7 +21,7 @@ export async function doLogin() {
 }
 
 function getContract() {
-  const web3 = localStorage.getItem("web3");
+  const web3 = localStorage.getItem("wallet");
   if (!web3) throw new Error("Metamask not installed");
   return new Web3.eth.Contract(ABI, contractAddress, { from });
 }
@@ -37,4 +36,9 @@ export async function addCampaign(campaign) {
       campaign.videoUrl
     )
     .send();
+}
+
+export async function getLastCampaignId() {
+  const contract = getContract();
+  return contract.methods.nextId().call();
 }
