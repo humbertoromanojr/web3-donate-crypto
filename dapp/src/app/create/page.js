@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { addCampaign } from "@/services/Web3Service";
+
 export default function Create() {
   const [message, setMessage] = useState("");
   const [campaign, setCampaign] = useState({});
@@ -21,10 +23,6 @@ export default function Create() {
     justifyContent: "space-between",
   };
 
-  function handleRegisterCampaign(e) {
-    setMessage("Campaign successfully registered");
-  }
-
   function handleInputChange(e) {
     setCampaign((prevState) => ({
       ...prevState,
@@ -33,8 +31,13 @@ export default function Create() {
   }
 
   function handleSave() {
-    setMessage(JSON.stringify(campaign));
-    console.log(campaign);
+    setMessage("Saving campaign...please wait...");
+    addCampaign(campaign)
+      .then((tx) => JSON.stringify(tx))
+      .catch((error) => {
+        setMessage(error.message);
+        console.error(error);
+      });
   }
 
   return (
