@@ -29,8 +29,6 @@ DONATE CRYPTO WEB 3.0
 
 - [Web3](https://github.com/web3/web3.js)
 
-- [Object hash](https://github.com/puleos/object-hash)
-
 ## Demonstration
 
 <div align="center">
