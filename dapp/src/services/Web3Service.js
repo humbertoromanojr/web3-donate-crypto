@@ -21,9 +21,11 @@ export async function doLogin() {
 }
 
 function getContract() {
-  const web3 = localStorage.getItem("wallet");
+  const web3 = new Web3(window.ethereum);
   if (!web3) throw new Error("Metamask not installed");
-  return new Web3.eth.Contract(ABI, contractAddress, { from });
+
+  const from = localStorage.getItem("wallet");
+  return new web3.eth.Contract(ABI, contractAddress, { from });
 }
 
 export async function addCampaign(campaign) {
@@ -41,4 +43,9 @@ export async function addCampaign(campaign) {
 export async function getLastCampaignId() {
   const contract = getContract();
   return contract.methods.nextId().call();
+}
+
+export async function getCampaign(id) {
+  const contract = getContract();
+  return contract.methods.campaigns(id).call();
 }
