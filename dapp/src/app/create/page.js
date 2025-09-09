@@ -36,7 +36,7 @@ export default function Create() {
       .then((tx) => getLastCampaignId())
       .then((id) => {
         setMessage(
-          `Campaign saved with ID: ${id}. In a few moments, you will be ready to receive donations. . Use this link to promote it: http://localhost:3000/doante/${id}`
+          `Campaign saved with ID: ${id}. In a few moments, you will be ready to receive donations. . Use this link to promote it: http://localhost:3000/donate/${id}`
         );
       })
       .catch((error) => {
