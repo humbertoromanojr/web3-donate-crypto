@@ -1,11 +1,16 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 export default function Home() {
+  const { push } = useRouter();
+
   const backgroundImageStyle = {
     backgroundImage: "url(/people-sunset.jpg)",
     backgroundSize: "cover",
     backgroundPosition: "center",
-    height: "80vh",
+    height: "100vh",
+    width: "100vw",
     color: "white",
     margin: 0,
     padding: 0,
@@ -14,6 +19,10 @@ export default function Home() {
     alignItems: "center",
     justifyContent: "space-between",
   };
+
+  function handleLogin() {
+    push("/create");
+  }
 
   return (
     <>
@@ -27,23 +36,26 @@ export default function Home() {
             <h1 className="display-5 fw-bold lh-1 mb-3 text-body-emphasis">
               Donate Crypto
             </h1>
-            <p className="lead">Sua plataforma descentralizada de Doações.</p>
+            <p className="lead">Your decentralized donation platform.</p>
             <p className="lead">
-              Autentique-se com sua carteira e crie sua campanha.
+              Log in with your wallet and create your campaign.
             </p>
             <p className="lead mb-4">
-              Para Doações, use o link da campanha já existente.
+              For donations, use the link to an existing campaign.
             </p>
             <div className="d-flex justify-content-start mt-5">
-              <button className="btn btn-primary btn-lg px-4 me-2">
+              <button className="btn btn-primary btn-lg" onClick={handleLogin}>
                 <img
                   src="/logo-metamask.png"
                   alt="logo metamask"
                   width={32}
                   className="me-2"
                 />
-                Conectar com a Metamask
+                Connect with Metamask
               </button>
+            </div>
+            <div className="alert alert-success mt-5 opacity-50">
+              User successfully authenticated
             </div>
           </div>
           <div className="col-2">&nbsp;</div>
