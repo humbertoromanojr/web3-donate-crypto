@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { push } = useRouter();
+
+  const [message, setMessage] = useState("");
 
   const backgroundImageStyle = {
     backgroundImage: "url(/people-sunset.jpg)",
@@ -21,6 +24,7 @@ export default function Home() {
   };
 
   function handleLogin() {
+    setMessage("User successfully authenticated");
     push("/create");
   }
 
@@ -54,9 +58,11 @@ export default function Home() {
                 Connect with Metamask
               </button>
             </div>
-            <div className="alert alert-success mt-5 opacity-50">
-              User successfully authenticated
-            </div>
+            {message ? (
+              <div className="alert alert-success mt-5 opacity-50">
+                {message}
+              </div>
+            ) : null}
           </div>
           <div className="col-2">&nbsp;</div>
         </div>

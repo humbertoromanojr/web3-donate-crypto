@@ -1,6 +1,10 @@
 "use client";
 
+import { useState } from "react";
+
 export default function Create() {
+  const [message, setMessage] = useState("");
+
   const backgroundImageStyle = {
     backgroundImage: "url(/people-sunset.jpg)",
     backgroundSize: "cover",
@@ -15,6 +19,10 @@ export default function Create() {
     alignItems: "center",
     justifyContent: "space-between",
   };
+
+  function handleRegisterCampaign() {
+    setMessage("Campaign successfully registered");
+  }
 
   return (
     <>
@@ -69,13 +77,16 @@ export default function Create() {
               <button
                 type="button"
                 className="btn btn-primary col-12 p-3 fw-bold mb-3 text-white"
+                onClick={handleRegisterCampaign}
               >
                 Save
               </button>
             </div>
-            <div className="alert alert-success p-3 col-12 opacity-50">
-              Campaign successfully registered
-            </div>
+            {message ? (
+              <div className="alert alert-success mt-5 opacity-50">
+                {message}
+              </div>
+            ) : null}
           </div>
           <div className="col-2">&nbsp;</div>
         </div>
